@@ -1,0 +1,28 @@
+# Backend framework
+fastapi
+uvicorn[standard]
+
+# Data validation and settings
+pydantic
+pydantic-settings
+python-dotenv
+
+# PDF processing
+pymupdf
+
+# Embedding and vector database
+sentence-transformers
+chromadb
+
+# Database
+sqlalchemy
+
+# LLM
+google-genai
+
+# File upload
+python-multipart
+
+# Testing
+pytest
+httpx

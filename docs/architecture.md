@@ -1,0 +1,1 @@
+Kiến trúc React, FastAPI, SQLite, ChromaDB, Gemini

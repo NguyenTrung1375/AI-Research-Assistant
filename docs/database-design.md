@@ -1,0 +1,1 @@
+	Thiết kế Document, Conversation, Message và metadata
