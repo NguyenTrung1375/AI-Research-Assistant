@@ -5,6 +5,10 @@ from app.schemas.document import (
     DocumentStatusResponse,
     DocumentUploadResponse,
 )
+from app.schemas.rag import (
+    RAGAnswer,
+    RAGQuestionRequest,
+)
 from app.schemas.retrieval import (
     Citation,
     RetrievalRequest,
@@ -19,6 +23,8 @@ __all__ = [
     "DocumentResponse",
     "DocumentStatusResponse",
     "DocumentUploadResponse",
+    "RAGAnswer",
+    "RAGQuestionRequest",
     "RetrievalRequest",
     "RetrievalResponse",
     "RetrievedChunk",

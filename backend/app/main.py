@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import documents, health, retrieval
+from app.api.routes import documents, health, rag, retrieval
 from app.core.config import settings
 
 
@@ -27,6 +27,7 @@ app.add_middleware(
 app.include_router(health.router)
 app.include_router(documents.router)
 app.include_router(retrieval.router)
+app.include_router(rag.router)
 
 
 @app.get("/")
