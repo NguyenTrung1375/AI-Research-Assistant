@@ -36,6 +36,10 @@ htmlcov/
 .idea/
 .vscode/
 
+# AI Agent metadata
+.agents/
+skills-lock.json
+
 # OS
 .DS_Store
 Thumbs.db

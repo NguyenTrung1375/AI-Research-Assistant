@@ -15,6 +15,8 @@ class Settings(BaseSettings):
     DATABASE_URL: str
 
     CHROMA_PERSIST_DIRECTORY: str = "./data/chroma_db"
+    CHROMA_COLLECTION_NAME: str = "research_documents"
+    EMBEDDING_MODEL_NAME: str = "intfloat/multilingual-e5-base"
     UPLOAD_DIR: str = "./data/uploads"
     MAX_UPLOAD_SIZE_MB: int = 20
 

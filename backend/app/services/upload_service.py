@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.models.document import Document
+from app.rag.vector_store.chroma_store import get_vector_store
 from app.repositories.document_repository import DocumentRepository
 from app.services.document_processor import process_pdf
 
@@ -105,10 +106,15 @@ async def handle_pdf_upload(
         status="processing",
     )
 
+    vector_store = get_vector_store()
+
     try:
         chunks = process_pdf(saved_file_path)
         if not chunks:
             raise ValueError("No extractable text found in the PDF document.")
+
+        # Task 3.7: Tạo vector embedding và lưu trữ vào ChromaDB
+        vector_store.add_chunks(document_id=document.id, chunks=chunks)
 
         page_count = _get_pdf_page_count(saved_file_path)
         document = repo.update_processing_result(
@@ -119,12 +125,14 @@ async def handle_pdf_upload(
         return document
 
     except ValueError as exc:
+        vector_store.delete_by_document_id(document.id)
         repo.update_failed_status(document=document, error_message=str(exc))
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail=str(exc),
         ) from exc
     except Exception as exc:
+        vector_store.delete_by_document_id(document.id)
         repo.update_failed_status(
             document=document,
             error_message="Unexpected error during PDF processing.",

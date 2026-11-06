@@ -9,6 +9,7 @@ from app.core.config import settings
 from app.database.session import SessionLocal
 from app.main import app
 from app.models.document import Document
+from app.rag.vector_store.chroma_store import get_vector_store
 
 client = TestClient(app)
 
@@ -55,6 +56,10 @@ def test_full_document_lifecycle_integration():
         assert doc_info["chunk_count"] >= 1
         assert saved_file_path.exists()
 
+        # Task 3.7: Xác nhận vectors đã được lưu vào ChromaDB
+        vector_store = get_vector_store()
+        assert vector_store.count_by_document_id(doc_id) == doc_info["chunk_count"]
+
         # 2. List documents
         list_res = client.get("/api/documents")
         assert list_res.status_code == 200
@@ -93,6 +98,9 @@ def test_full_document_lifecycle_integration():
 
         # 7. Xác nhận file vật lý đã bị xóa
         assert not saved_file_path.exists()
+
+        # Task 3.8: Xác nhận toàn bộ vectors trong ChromaDB đã bị xóa
+        assert vector_store.count_by_document_id(doc_id) == 0
 
         # 8. Xác nhận record trong DB đã bị xóa
         assert client.get(f"/api/documents/{doc_id}").status_code == 404
