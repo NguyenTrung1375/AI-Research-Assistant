@@ -1,3 +1,13 @@
+from app.schemas.conversation import (
+    ConversationCreateRequest,
+    ConversationDeleteResponse,
+    ConversationDetailResponse,
+    ConversationListResponse,
+    ConversationResponse,
+    MessageResponse,
+    SendMessageRequest,
+    SendMessageResponse,
+)
 from app.schemas.document import (
     DocumentDeleteResponse,
     DocumentListResponse,
@@ -18,16 +28,24 @@ from app.schemas.retrieval import (
 
 __all__ = [
     "Citation",
+    "ConversationCreateRequest",
+    "ConversationDeleteResponse",
+    "ConversationDetailResponse",
+    "ConversationListResponse",
+    "ConversationResponse",
     "DocumentDeleteResponse",
     "DocumentListResponse",
     "DocumentResponse",
     "DocumentStatusResponse",
     "DocumentUploadResponse",
+    "MessageResponse",
     "RAGAnswer",
     "RAGQuestionRequest",
     "RetrievalRequest",
     "RetrievalResponse",
     "RetrievedChunk",
+    "SendMessageRequest",
+    "SendMessageResponse",
 ]
 
 
